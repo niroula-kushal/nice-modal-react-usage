@@ -3,7 +3,7 @@ import { X } from "lucide-react"
 import { Button } from "./components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "./components/ui/card"
 
-export const SideModal = NiceModal.create(() => {
+export const SideModal = NiceModal.create(({ name = "Admin" }) => {
   const modal = useModal()
 
   return (
@@ -24,7 +24,7 @@ export const SideModal = NiceModal.create(() => {
       >
         <div className="mb-6 flex items-center justify-between">
           <h3 id="side-modal-title" className="text-lg font-semibold">
-            Quick Actions
+            Quick Actions for {name}
           </h3>
           <Button size="sm" variant="outline" onClick={() => modal.hide()}>
             <X className="h-4 w-4" />

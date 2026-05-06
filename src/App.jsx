@@ -30,7 +30,7 @@ export default function App() {
               <p className="text-muted-foreground">Welcome back, here is your business overview.</p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={() => NiceModal.show(SideModal)}>
+              <Button variant="outline" size="sm" onClick={() => NiceModal.show(SideModal, { name: "Nate" })}>
                 Open Side Modal
               </Button>
               <Button variant="outline" size="sm">
