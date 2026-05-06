@@ -1,21 +1,15 @@
 import { X } from "lucide-react"
 import { Button } from "./components/ui/button"
-import { useSearchParams } from "react-router-dom"
+import { useModalRouteState } from "./modal-route-state"
 
 export function ChildModal({ isOpen, name = "Nate" }) {
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const closeChild = () => {
-    const next = new URLSearchParams(searchParams)
-    next.delete("child")
-    setSearchParams(next)
-  }
+  const { closeChildModal } = useModalRouteState()
 
   return (
     <div className={`fixed inset-0 z-[60] transition ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
       <button
         className={`absolute inset-0 bg-black/30 transition-opacity ${isOpen ? "opacity-100" : "opacity-0"}`}
-        onClick={closeChild}
+        onClick={closeChildModal}
         aria-label="Close child side modal"
       />
 
@@ -31,7 +25,7 @@ export function ChildModal({ isOpen, name = "Nate" }) {
           <h4 id="child-side-modal-title" className="text-base font-semibold">
             Nested Side Modal
           </h4>
-          <Button size="sm" variant="outline" onClick={closeChild}>
+          <Button size="sm" variant="outline" onClick={closeChildModal}>
             <X className="h-4 w-4" />
           </Button>
         </div>

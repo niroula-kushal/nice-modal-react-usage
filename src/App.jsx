@@ -2,7 +2,7 @@ import { Bell, CreditCard, Users, BarChart3 } from "lucide-react"
 import { Button } from "./components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/ui/card"
 import { SideModal } from "./side-modal"
-import { useSearchParams } from "react-router-dom"
+import { ModalRouteStateProvider, useModalRouteState } from "./modal-route-state"
 
 const stats = [
   { title: "Total Revenue", value: "$48,241", icon: CreditCard, detail: "+12.5% from last month" },
@@ -10,15 +10,8 @@ const stats = [
   { title: "Conversion", value: "6.42%", icon: BarChart3, detail: "+0.8% today" },
 ]
 
-export default function App() {
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const openSideModal = () => {
-    const next = new URLSearchParams(searchParams)
-    next.set("modal", "side")
-    next.set("name", "Nate")
-    setSearchParams(next)
-  }
+function Dashboard() {
+  const { openSideModal } = useModalRouteState()
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -39,7 +32,7 @@ export default function App() {
               <p className="text-muted-foreground">Welcome back, here is your business overview.</p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={openSideModal}>
+              <Button variant="outline" size="sm" onClick={() => openSideModal("Nate")}>
                 Open Side Modal
               </Button>
               <Button variant="outline" size="sm">
@@ -67,5 +60,14 @@ export default function App() {
 
       <SideModal />
     </div>
+  )
+}
+
+
+export default function App() {
+  return (
+    <ModalRouteStateProvider>
+      <Dashboard />
+    </ModalRouteStateProvider>
   )
 }

@@ -2,27 +2,10 @@ import { X } from "lucide-react"
 import { Button } from "./components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "./components/ui/card"
 import { ChildModal } from "./child-modal"
-import { useSearchParams } from "react-router-dom"
+import { useModalRouteState } from "./modal-route-state"
 
 export function SideModal() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const isSideOpen = searchParams.get("modal") === "side"
-  const isChildOpen = searchParams.get("child") === "true"
-  const name = searchParams.get("name") ?? "Admin"
-
-  const closeSideModal = () => {
-    const next = new URLSearchParams(searchParams)
-    next.delete("modal")
-    next.delete("name")
-    next.delete("child")
-    setSearchParams(next)
-  }
-
-  const openChildModal = () => {
-    const next = new URLSearchParams(searchParams)
-    next.set("child", "true")
-    setSearchParams(next)
-  }
+  const { isSideOpen, isChildOpen, name, closeSideModal, openChildModal } = useModalRouteState()
 
   return (
     <>
