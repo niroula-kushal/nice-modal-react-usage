@@ -2,6 +2,7 @@ import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { X } from "lucide-react"
 import { Button } from "./components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "./components/ui/card"
+import { ChildModal } from "./child-modal"
 
 export const SideModal = NiceModal.create(({ name = "Admin" }) => {
   const modal = useModal()
@@ -28,6 +29,12 @@ export const SideModal = NiceModal.create(({ name = "Admin" }) => {
           </h3>
           <Button size="sm" variant="outline" onClick={() => modal.hide()}>
             <X className="h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="mb-4">
+          <Button variant="default" size="sm" onClick={() => NiceModal.show(ChildModal, { name })}>
+            Open Child Modal
           </Button>
         </div>
 
