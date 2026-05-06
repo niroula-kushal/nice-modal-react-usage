@@ -1,14 +1,14 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import NiceModal from "@ebay/nice-modal-react"
+import { BrowserRouter } from "react-router-dom"
 import App from "./App"
 import "antd/dist/reset.css"
 import "./index.css"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <NiceModal.Provider>
+    <BrowserRouter>
       <App />
-    </NiceModal.Provider>
+    </BrowserRouter>
   </React.StrictMode>,
 )
