@@ -1,21 +1,21 @@
-import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { X } from "lucide-react"
 import { Button } from "./components/ui/button"
+import { useModalRouteState } from "./modal-route-state"
 
-export const ChildModal = NiceModal.create(({ name = "Nate" }) => {
-  const modal = useModal()
+export function ChildModal({ isOpen, name = "Nate" }) {
+  const { closeChildModal } = useModalRouteState()
 
   return (
-    <div className={`fixed inset-0 z-[60] transition ${modal.visible ? "pointer-events-auto" : "pointer-events-none"}`}>
+    <div className={`fixed inset-0 z-[60] transition ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
       <button
-        className={`absolute inset-0 bg-black/30 transition-opacity ${modal.visible ? "opacity-100" : "opacity-0"}`}
-        onClick={() => modal.hide()}
+        className={`absolute inset-0 bg-black/30 transition-opacity ${isOpen ? "opacity-100" : "opacity-0"}`}
+        onClick={closeChildModal}
         aria-label="Close child side modal"
       />
 
       <aside
         className={`absolute right-0 top-0 h-full w-full max-w-sm border-l border-border bg-card p-6 shadow-2xl transition-transform duration-300 sm:w-[360px] ${
-          modal.visible ? "translate-x-0" : "translate-x-full"
+          isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
         aria-modal="true"
@@ -25,7 +25,7 @@ export const ChildModal = NiceModal.create(({ name = "Nate" }) => {
           <h4 id="child-side-modal-title" className="text-base font-semibold">
             Nested Side Modal
           </h4>
-          <Button size="sm" variant="outline" onClick={() => modal.hide()}>
+          <Button size="sm" variant="outline" onClick={closeChildModal}>
             <X className="h-4 w-4" />
           </Button>
         </div>
@@ -34,4 +34,4 @@ export const ChildModal = NiceModal.create(({ name = "Nate" }) => {
       </aside>
     </div>
   )
-})
+}
